@@ -1,0 +1,42 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.heading {
+	text-align: center;
+	color: red;
+}
+
+h3 {
+	text-align: center;
+}
+
+#tutorialButton {
+	float: right;
+}
+
+#leftbox {
+	text-align: center; 
+	border: solid; 
+	border-radius: 10px; 
+	margin-right: 10px;
+	margin-left: 10px;
+	height: 90%;
+}
+
+#centerbox {
+	text-align: center; 
+	border: solid; 
+	border-radius: 10px;
+	height: 90%;
+}
+
+#rightbox {
+	text-align: center;
+	border: solid; 
+	border-radius: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 90%;
+}
