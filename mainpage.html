@@ -9,7 +9,7 @@
   	</head>
 
 	<body>
-	  	<header style="margin-bottom: 50px;">
+	  	<header>
 	  		<div class="container">
 	  			<div class="col-md-3">
 	    		</div>
@@ -27,26 +27,65 @@
 	    		<div class="col-md-3" style="height: 100%;">
 	      			<h3>Watch</h3>
 	      			<div id="leftbox">
-	      				<a class="btn btn-primary btn-lg" href="" role="button">Watch Random Game</a> 
+	      				<a class="btn btn-primary btn-lg" href="" role="button" style="margin-top: 7%;">Watch Game</a>
+	      				<div id="watchList">
+	      					<div class="gamesElement">
+		      					<p class="hostName">Host1 </p>
+		      					<a class="btn btn-primary btn-lg" href="" role="button" style="font-size: 75%">Spectate Game</a>
+		      				</div>
+		      				<div class="gamesElement">
+		      					<p class="hostName">HostName2 </p>
+		      					<a class="btn btn-primary btn-lg" href="" role="button" style="font-size: 75%">Spectate Game</a>
+		      				</div>
+	      				</div>
 	      			</div>
 	    		</div>
+
 	    		<div class="col-md-6" style="height: 100%;">
 	      			<h3>Play</h3>
 	      			<div id="centerbox">
-	      				<a class="btn btn-primary btn-lg" href="" role="button">Start New Game</a>
-	      				<h4>Your Games in Progress</h4>
-	      				<h4>Open Games</h4>
+	      				<a class="btn btn-primary btn-lg" href="" role="button" style="margin-top: 3%;">Start New Game</a>
+	      				<h4 style="font-weight: bold">Single-Player Games in Progress</h4>
+	      				<div id="unfinishedList">
+	      					<div class="gamesElement">
+		      					<p class="gameName">Game1 </p>
+		      					<a class="btn btn-primary btn-lg" href="" role="button">Resume Game</a>
+		      				</div>
+		      				<div class="gamesElement">
+		      					<p class="gameName">GameName2 </p>
+		      					<a class="btn btn-primary btn-lg" href="" role="button">Resume Game</a>
+		      				</div>
+	      				</div>
+		      			<h4 style="font-weight: bold">Open Games</h4>
+		      			<div id="openList">
+		      				<div class="openElement">
+		      					<p class="gameName">Host1 </p>
+		      					<p class="numPlayers">(3/4)</p>
+		      					<a class="btn btn-primary btn-lg" href="" role="button">Join Game</a>
+		      				</div>
+		      				<div class="openElement">
+		      					<p class="gameName">HostName2 </p>
+		      					<p class="numPlayers">(1/4)</p>
+		      					<a class="btn btn-primary btn-lg" href="" role="button">Join Game</a>
+		      				</div>
+		      			</div>
 	      			</div>
 	    		</div>
+
 	    		<div class="col-md-3" style="height: 100%;">
 		      		<h3>Your Stats</h3>
 		      		<div id="rightbox">
-	      				<a class="btn btn-primary btn-lg" href="" role="button">View Detailed Stats</a> 
+	      				<a class="btn btn-primary btn-lg" href="" role="button" style="margin-top: 7%;">View Detailed Stats</a>
+	      				<div id="stats" style="text-align: left; margin-left: 15%; margin-top: 7%">
+	      					<p> Games Played: <span id="gamesPlayedStat">201</span></p>
+		      				<p> Games Won: &emsp;<span id="gamesWonStat">80</span></p>
+		      				<p> Games Lost: &emsp;<span id="gamesLostStat">119</span></p>
+		      				<p> Longest Game: <span id="longestGameStat">22 hrs</span></p>
+		      				<p> Shortest Game: <span id="shortestGameStat">1 min</span></p>
+	      				</div>
 	      			</div>
 	    		</div>      
 	  		</div>
 		</div>
-
-
   	</body>
 </html>
