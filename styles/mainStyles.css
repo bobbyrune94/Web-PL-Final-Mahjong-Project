@@ -56,6 +56,17 @@ p.numPlayers {
   	margin-top: 2%;
 }
 
+.topHead {
+	-moz-column-count: 3;
+  	-webkit-column-count: 3;
+  	column-count: 3;
+}
+
+#logoutButton {
+	float: left;
+	margin-top: 5%
+}
+
 #tutorialButton {
 	float: right;
 	margin-top: 5%
