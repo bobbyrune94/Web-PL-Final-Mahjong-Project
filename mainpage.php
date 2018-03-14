@@ -16,7 +16,16 @@
 		      			<a class="btn btn-primary btn-lg" href="login.html" role="button" id="logoutButton">Logout</a>
 		    		</div>
 		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
-		      			<h1 class="heading">Welcome, Username!</h1>
+		      			<h1 class="heading">Welcome, 
+                                            <?php 
+                                            if (isset($_POST['user'])) { #check to see if the username was sent through POST request
+                                                echo $_POST['user']; #if so, welcome user by username
+                                            }
+                                            else {
+                                                echo "Guest"; #if username not sent through POST, welcome user as guest
+                                            }
+                                            ?>!
+                                        </h1>
 		    		</div>
 		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
 		      			<a class="btn btn-primary btn-lg" href="tutorialpage.html" role="button" id="tutorialButton">New to Mahjong? <br> Play Some Tutorials!</a>
