@@ -50,7 +50,7 @@
 	    		<div class="col-md-6" style="height: 100%;">
 	      			<h3>Play</h3>
 	      			<div id="centerbox">
-	      				<a class="btn btn-primary btn-lg" href="empty.html" role="button" style="margin-top: 3%;">Start New Game</a>
+	      				<a class="btn btn-primary btn-lg" href="newGame.php" role="button" style="margin-top: 3%;">Start New Game</a>
 	      				<h4 style="font-weight: bold">Single-Player Games in Progress</h4>
 	      				<div id="unfinishedList">
 	      					<div class="gamesElement">
