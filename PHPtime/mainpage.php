@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8"> 
+	    <meta name="viewport" content="width=device-width, initial-scale=1">  
+	    <title>Mahjong | Main</title>
+	    <link rel="stylesheet" type="text/css" href="styles/mainStyles.css" />
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  	</head>
+
+	<body>
+	  	<header style="width: 100%; height: 15%;">
+	  		<div class="container">
+		  		<div class="row">
+		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
+		      			<a class="btn btn-primary btn-lg" href="login.html" role="button" id="logoutButton">Logout</a>
+		    		</div>
+		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
+                                        if (<?php isset($_POST["user"]) ?>){
+  		      			    <h1 class="heading">Welcome, <?php $_POST["user"] ?>!</h1>
+                                        }
+                                        else{
+                                            <h1 class="heading">Welcome, Guest!</h1>
+                                        }
+		    		</div>
+		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
+		      			<a class="btn btn-primary btn-lg" href="tutorialpage.html" role="button" id="tutorialButton">New to Mahjong? <br> Play Some Tutorials!</a>
+		    		</div>      
+		  		</div>
+		  	</div>
+	  	</header>
+
+	  	<div class="container" style="height: 100%;">
+	  		<div class="row" style="height: 100%;">
+	    		<div class="col-md-3" style="height: 100%;">
+	      			<h3>Watch</h3>
+	      			<div id="leftbox">
+	      				<a class="btn btn-primary btn-lg" href="empty.html" role="button" style="margin-top: 7%;">Watch Game</a>
+	      				<div id="watchList">
+	      					<div class="gamesElement">
+		      					<p class="hostName">Host1 </p>
+		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button" style="font-size: 75%">Spectate Game</a>
+		      				</div>
+		      				<div class="gamesElement">
+		      					<p class="hostName">HostName2 </p>
+		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button" style="font-size: 75%">Spectate Game</a>
+		      				</div>
+	      				</div>
+	      			</div>
+	    		</div>
+
+	    		<div class="col-md-6" style="height: 100%;">
+	      			<h3>Play</h3>
+	      			<div id="centerbox">
+	      				<a class="btn btn-primary btn-lg" href="empty.html" role="button" style="margin-top: 3%;">Start New Game</a>
+	      				<h4 style="font-weight: bold">Single-Player Games in Progress</h4>
+	      				<div id="unfinishedList">
+	      					<div class="gamesElement">
+		      					<p class="gameName">Game1 </p>
+		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button">Resume Game</a>
+		      				</div>
+		      				<div class="gamesElement">
+		      					<p class="gameName">GameName2 </p>
+		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button">Resume Game</a>
+		      				</div>
+	      				</div>
+		      			<h4 style="font-weight: bold">Open Games</h4>
+		      			<div id="openList">
+		      				<div class="openElement">
+		      					<p class="gameName">Host1 </p>
+		      					<p class="numPlayers">(3/4)</p>
+		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button">Join Game</a>
+		      				</div>
+		      				<div class="openElement">
+		      					<p class="gameName">HostName2 </p>
+		      					<p class="numPlayers">(1/4)</p>
+		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button">Join Game</a>
+		      				</div>
+		      			</div>
+	      			</div>
+	    		</div>
+
+	    		<div class="col-md-3" style="height: 100%;">
+		      		<h3>Your Stats</h3>
+		      		<div id="rightbox">
+	      				<a class="btn btn-primary btn-lg" href="empty.html" role="button" style="margin-top: 7%;">View Detailed Stats</a>
+	      				<div id="stats" style="text-align: left; margin-left: 15%; margin-top: 7%; width: 100%">
+	      					<div class="statsElement">
+		      					<p>Games Played: </p>
+		      					<p id="gamesPlayedStat">201</p>
+		      				</div>
+		      				<div class="statsElement">
+		      					<p>Games Won: </p>
+		      					<p id="gamesWonStat">80</p>
+		      				</div>
+		      				<div class="statsElement">
+		      					<p>Games Lost: </p>
+		      					<p id="gamesLostStat">119</p>
+		      				</div>
+		      				<div class="statsElement">
+		      					<p>Longest Game: </p>
+		      					<p id="longestGameStat">22 hrs</p>
+		      				</div>
+		      				<div class="statsElement">
+		      					<p>Shortest Game: </p>
+		      					<p id="shortestGameStat">1 min</p>
+		      				</div>
+	      				</div>
+	      			</div>
+	    		</div>      
+	  		</div>
+		</div>
+  	</body>
+</html>

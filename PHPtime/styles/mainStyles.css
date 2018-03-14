@@ -1,0 +1,95 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+	background-image: url("http://www.mahjongtreasures.com/wp-content/uploads/2014/05/Screen-Shot-2014-05-28-at-3.14.02-PM.png");
+}
+
+h3 {
+	text-align: center;
+}
+
+.heading {
+	text-align: center;
+	color: blue;
+	font-weight: bold;
+}
+
+p.gameName {
+	font-size: 150%
+}
+
+p.hostName {
+	margin-top: 10%;
+	font-size: 110%;
+}
+
+p.numPlayers {
+	text-align: center;
+	font-size: 110%;
+}
+
+.openElement {
+	-moz-column-count: 3;
+  	-webkit-column-count: 3;
+  	column-count: 3;
+  	margin-top: 2%;
+}
+
+.gamesElement {
+	-moz-column-count: 2;
+  	-webkit-column-count: 2;
+  	column-count: 2;
+  	margin-top: 4%;
+}
+
+.statsElement {
+	-moz-column-count: 2;
+  	-webkit-column-count: 2;
+  	column-count: 2;
+  	column-width: 100%;
+  	margin-top: 2%;
+}
+
+.topHead {
+	-moz-column-count: 3;
+  	-webkit-column-count: 3;
+  	column-count: 3;
+}
+
+#logoutButton {
+	float: left;
+	margin-top: 5%
+}
+
+#tutorialButton {
+	float: right;
+	margin-top: 5%
+}
+
+#leftbox {
+	text-align: center; 
+	border: solid; 
+	border-radius: 10px; 
+	margin-right: 3%;
+	margin-left: 3%;
+	height: 80%;
+}
+
+#centerbox {
+	text-align: center; 
+	border: solid; 
+	border-radius: 10px;
+	height: 80%;
+}
+
+#rightbox {
+	text-align: center;
+	border: solid; 
+	border-radius: 10px;
+	margin-left: 3%;
+	margin-right: 3%;
+	height: 80%;
+}
