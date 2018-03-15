@@ -13,15 +13,28 @@
 	  		<div class="container">
 		  		<div class="row">
 		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
-		      			<a class="btn btn-primary btn-lg" href="login.html" role="button" id="logoutButton">Logout</a>
+		      			<a class="btn btn-primary btn-lg" href="login.php" role="button" id="logoutButton">Logout</a>
 		    		</div>
 		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
-                                        if (<?php isset($_POST["user"]) ?>){
-  		      			    <h1 class="heading">Welcome, <?php $_POST["user"] ?>!</h1>
-                                        }
-                                        else{
-                                            <h1 class="heading">Welcome, Guest!</h1>
-                                        }
+		      			<h1 class="heading">Welcome, 
+                            <?php
+                            	session_start();
+                            	if(isset($_SESSION['user'])) //if there is already a user, then use that
+                            		echo $_SESSION['user'];
+                            	else
+                            	{
+                            		if(isset($_POST['user'])) //if the user just logged in with a username
+                            		{
+                            			$_SESSION['user'] = $_POST['user']; //save the username
+                            		}
+                            		else //if the user logged in without a username
+                            		{
+                            			$_SESSION['user'] = "Guest"; //save the user as a guest
+                            		}
+                            		echo $_SESSION['user'];
+                            	}
+                            ?>!
+                        </h1>
 		    		</div>
 		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
 		      			<a class="btn btn-primary btn-lg" href="tutorialpage.html" role="button" id="tutorialButton">New to Mahjong? <br> Play Some Tutorials!</a>
@@ -32,6 +45,8 @@
 
 	  	<div class="container" style="height: 100%;">
 	  		<div class="row" style="height: 100%;">
+
+	  			<!--This is the column for the list of games that the user can watch-->
 	    		<div class="col-md-3" style="height: 100%;">
 	      			<h3>Watch</h3>
 	      			<div id="leftbox">
@@ -49,37 +64,63 @@
 	      			</div>
 	    		</div>
 
+	    		<!--This is the column the user to great games, continue old games, or join existing games-->
 	    		<div class="col-md-6" style="height: 100%;">
 	      			<h3>Play</h3>
 	      			<div id="centerbox">
-	      				<a class="btn btn-primary btn-lg" href="empty.html" role="button" style="margin-top: 3%;">Start New Game</a>
+	      				<a class="btn btn-primary btn-lg" href="newGame.php" role="button" style="margin-top: 3%;">Start New Game</a>
 	      				<h4 style="font-weight: bold">Single-Player Games in Progress</h4>
-	      				<div id="unfinishedList">
-	      					<div class="gamesElement">
-		      					<p class="gameName">Game1 </p>
-		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button">Resume Game</a>
-		      				</div>
-		      				<div class="gamesElement">
-		      					<p class="gameName">GameName2 </p>
-		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button">Resume Game</a>
-		      				</div>
+	      				<div class="gamesElement">
+	      					<p style="font-weight: bold; font-size: 20px">Game Name</p>
+	      				</div>
+	      				<div id="unfinishedList" style="height: 30%;overflow: auto">
+	      					<?php
+	      						if(isset($_SESSION['singleGameName']))
+	      						{
+	      							createNewGameElement();
+	      						}
+
+	      						function createNewGameElement()
+	      						{
+	      							foreach($_SESSION['singleGameName'] as $gameName)
+	      							{
+	      								echo "<div class=\"gamesElement\">";
+		      							echo "<p class=\"gameName\">". $gameName . " </p>";
+		      							echo "<a class=\"btn btn-primary btn-lg\" href=\"empty.html\" role=\"button\">Resume Game</a>";
+		      							echo "</div>";
+	      							}
+	      						}
+	      					?>
 	      				</div>
 		      			<h4 style="font-weight: bold">Open Games</h4>
-		      			<div id="openList">
-		      				<div class="openElement">
-		      					<p class="gameName">Host1 </p>
-		      					<p class="numPlayers">(3/4)</p>
-		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button">Join Game</a>
-		      				</div>
-		      				<div class="openElement">
-		      					<p class="gameName">HostName2 </p>
-		      					<p class="numPlayers">(1/4)</p>
-		      					<a class="btn btn-primary btn-lg" href="empty.html" role="button">Join Game</a>
-		      				</div>
+		      			<div class="openElement">
+	      					<p style="font-weight: bold; font-size: 20px;">Game Name</p>
+	      					<p style="font-weight: bold; font-size: 20px;">Num People</p>
+	      				</div>
+		      			<div id="openList" style="height: 30%; overflow: auto; overflow-x: hidden;">
+		      				<?php
+	      						if(isset($_SESSION['multiGameName']))
+	      						{
+	      							createNewOpenElement($_SESSION['multiGameName']);
+	      						}
+
+	      						function createNewOpenElement($gameName)
+	      						{
+	      							foreach($_SESSION['multiGameName'] as $gameName)
+	      							{
+										echo "<div class=\"openElement\">";
+		      							echo "<p class=\"gameName\">". $gameName . "</p>";
+		      							echo "<p class=\"numPlayers\">(1/4)</p>";
+		      							echo "<a class=\"btn btn-primary btn-lg\" href=\"empty.html\" role=\"button\">Join Game</a>";
+		      							echo "</div>";
+		      						}
+	      						}
+	      					?>
 		      			</div>
 	      			</div>
 	    		</div>
 
+	    		<!--This is the column for the user's stats-->
 	    		<div class="col-md-3" style="height: 100%;">
 		      		<h3>Your Stats</h3>
 		      		<div id="rightbox">
