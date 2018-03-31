@@ -18,11 +18,11 @@
 		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
 		      			<h1 class="heading">Welcome, 
                             <?php
-                            	session_start();
-                            	if(isset($_SESSION['user'])) //if there is already a user, then use that
-                            		echo $_SESSION['user'];
-                            	else
-                            	{
+								session_start();
+                            	// if(isset($_SESSION['user'])) //if there is already a user, then use that
+                            	// 	echo $_SESSION['user'];
+                            	// else
+                            	// {
                             		if(isset($_POST['user'])) //if the user just logged in with a username
                             		{
                             			$_SESSION['user'] = $_POST['user']; //save the username
@@ -32,7 +32,7 @@
                             			$_SESSION['user'] = "Guest"; //save the user as a guest
                             		}
                             		echo $_SESSION['user'];
-                            	}
+                            	// }
                             ?>!
                         </h1>
 		    		</div>

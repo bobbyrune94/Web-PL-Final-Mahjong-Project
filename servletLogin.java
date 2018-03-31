@@ -11,29 +11,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/cs4640.servletLogin")
+@WebServlet("/servletLogin")
 public class servletLogin extends HttpServlet 
 {
 
    String msg = "";
-
-public void doPost(HttpServletRequest request, HttpServletResponse response) 
+   
+   public void doPost(HttpServletRequest request, HttpServletResponse response) 
                throws ServletException, IOException 
    {
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
       
       HttpSession session = request.getSession();
-      String username = (String)session.getAttribute("username");
-      
+      String username = request.getParameter("user");      
       
       if (username != null)
       {    	 	 
+    	  session.setAttribute("username", username);
+    	  
+    	  //response.sendRedirect("http://localhost:80/CS4640Project/mainpage.php");
           out.println("<html>");
           out.println("<head>");
-          out.println("<title>Redirect<title>");
+          out.println("<title>Redirect</title>");
           out.println("</head>");
-          out.println("<body onload=\"mainpage.java\">");
+          out.println("<body onload='setTimeout(function() { document.form.submit() }, 1)'>");
+          out.println("    <form action='http://localhost:80/CS4640Project/mainpage.php' method='post' name='form' onsubmit='return true'>");
+          out.println("        <input type='text' name='user' value='" + username + "'/>");
+          out.println("    </form>");
           out.println("</body>");
           out.println("</html>");
       }
@@ -62,7 +67,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
               "        </div>" +
               "        <!-- the below column holds the login form -->" +
               "        <div class='col-md-3'>" +
-              "       <form action='mainpage.php' method='post' style='text-align: left' class='container' onsubmit='return (validateLogin())'> " +
+              "        <form action='http://localhost:8080/WebPLProject/servletLogin' method='post' style='text-align: left' class='container'> " +
               "           <label>Username: </label> <input type='text' name='user' autofocus required />" +
               "           <!-- user-msg is used to inform users of invalid username entries -->" +
               "           <div style='color:red' id='user-msg'></div>" +
@@ -122,5 +127,10 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
       }
       
       out.close();
+   }
+   public void doGet(HttpServletRequest request, HttpServletResponse response)
+		   throws ServletException, IOException 
+   {
+	   doPost(request, response);
    }
 }

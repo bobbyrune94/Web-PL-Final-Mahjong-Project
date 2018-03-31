@@ -12,8 +12,9 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class projectServlet
  */
-@WebServlet("/projectServlet")
-public class projectServlet extends HttpServlet {
+@WebServlet("/tutorialServlet")
+public class tutorialServlet extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
 
 	private boolean[] tutorialsDone;
@@ -21,7 +22,8 @@ public class projectServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public projectServlet() {
+	public tutorialServlet() 
+	{
 		super();
 		tutorialsDone = new boolean[] { false, false, false, false };
 		// TODO Auto-generated constructor stub
@@ -31,25 +33,25 @@ public class projectServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("finished") != null)
-			tutorialsDone = (boolean[]) session.getAttribute("finished");
+		if (session.getAttribute("tutorialsFinished") != null)
+			tutorialsDone = (boolean[]) session.getAttribute("tutorialsFinished");
 
 		String tutorialFinished = request.getParameter("tutorialName");
 		finishTutorial(tutorialFinished);
 
-		session.setAttribute("finished", tutorialsDone);
+		session.setAttribute("tutorialsFinished", tutorialsDone);
 
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>Tutorials Finished</title>");
-		out.println("<link rel=stylesheet href='styles/example-style.css' type='text/css'>");
+		out.println("<link rel=stylesheet href='styles/mainStyles.css' type='text/css'>");
 		out.println("</head>");
 		out.println("<body>");
 		out.println("    <p>Start Tutorial Finished: " + tutorialsDone[0] + "</p>");
@@ -60,7 +62,8 @@ public class projectServlet extends HttpServlet {
 		out.println("</html>");
 	}
 
-	private void finishTutorial(String tutorialName) {
+	private void finishTutorial(String tutorialName) 
+	{
 		if (tutorialName.equals("startTutorial"))
 			tutorialsDone[0] = true;
 		else if (tutorialName.equals("basicPlay"))
