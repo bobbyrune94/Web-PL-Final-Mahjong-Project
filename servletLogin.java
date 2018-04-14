@@ -78,7 +78,7 @@ public class servletLogin extends HttpServlet
               "          <!-- pass-msg is used to inform users of an incorrect password entry -->" +
               "          <div style='color:red' id='pass-msg'></div>" +
               "          <br/>" +
-              "          <input type='submit' value='Log in'/>" +
+              "          <input class='btn btn-primary btn-lg' type='submit' value='Log in'/>" +
               "      </form>" +
               "  </div>" +
               "</div>" +

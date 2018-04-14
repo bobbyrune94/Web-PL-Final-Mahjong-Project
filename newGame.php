@@ -13,7 +13,7 @@
 			<h1> Create New Game </h1>
 			<p style="margin-top: 1%">Game Name: <textarea rows="1" cols="20" name="gameName"></textarea></p>
 			<input type="checkbox" id="singlePlayer" name="single" style="margin-top: 1%"> Single Player? <br/>
-			<input type="submit" value="Create New Game" name="btn" style="margin-top: 1%"/>
+			<input class="btn btn-primary btn-lg" type="submit" value="Create New Game" name="btn" style="margin-top: 1%"/>
 		</form>
 
  		<?php

@@ -19,20 +19,19 @@
 		      			<h1 class="heading">Welcome, 
                             <?php
 								session_start();
-                            	// if(isset($_SESSION['user'])) //if there is already a user, then use that
-                            	// 	echo $_SESSION['user'];
-                            	// else
-                            	// {
                             		if(isset($_POST['user'])) //if the user just logged in with a username
                             		{
                             			$_SESSION['user'] = $_POST['user']; //save the username
+                            			echo $_SESSION['user'];
+                            		}
+                            		else if(isset($_SESSION['user']))
+                            		{
+                            			echo $_SESSION['user'];
                             		}
                             		else //if the user logged in without a username
                             		{
-                            			$_SESSION['user'] = "Guest"; //save the user as a guest
+                            			echo "Guest"; //save the user as a guest
                             		}
-                            		echo $_SESSION['user'];
-                            	// }
                             ?>!
                         </h1>
 		    		</div>
@@ -75,6 +74,10 @@
 	      				</div>
 	      				<div id="unfinishedList" style="height: 30%;overflow: auto">
 	      					<?php
+	      						if(isset($_POST['removeSingleIndex']) && ($_POST['removeSingleIndex'] != "null"))
+                        		{
+                        			array_splice($_SESSION['singleGameName'], $_POST['removeSingleIndex'], 1);
+                        		}
 	      						if(isset($_SESSION['singleGameName']))
 	      						{
 	      							createNewGameElement();
@@ -82,11 +85,11 @@
 
 	      						function createNewGameElement()
 	      						{
-	      							foreach($_SESSION['singleGameName'] as $gameName)
+	      							for($i = 0; $i < count($_SESSION['singleGameName']); $i++)
 	      							{
 	      								echo "<div class=\"gamesElement\">";
-		      							echo "<p class=\"gameName\">". $gameName . " </p>";
-		      							echo "<a class=\"btn btn-primary btn-lg\" href=\"empty.html\" role=\"button\">Resume Game</a>";
+		      							echo "<p class=\"gameName\">". $_SESSION['singleGameName'][$i] . " </p>";
+		      							echo "<a class=\"btn btn-primary btn-lg\" href=\"http://localhost:8080/WebPLProject/updateStats.jsp?play=yes&singleIndex=" . $i ."\" role=\"button\">Resume Game</a>";
 		      							echo "</div>";
 	      							}
 	      						}
@@ -99,6 +102,10 @@
 	      				</div>
 		      			<div id="openList" style="height: 30%; overflow: auto; overflow-x: hidden;">
 		      				<?php
+		      					if(isset($_POST['removeMultiIndex']) && ($_POST['removeMultiIndex'] != "null"))
+                        		{
+                        			array_splice($_SESSION['multiGameName'], $_POST['removeMultiIndex'], 1);
+                        		}
 	      						if(isset($_SESSION['multiGameName']))
 	      						{
 	      							createNewOpenElement($_SESSION['multiGameName']);
@@ -106,12 +113,12 @@
 
 	      						function createNewOpenElement($gameName)
 	      						{
-	      							foreach($_SESSION['multiGameName'] as $gameName)
+	      							for($i = 0; $i < count($_SESSION['multiGameName']); $i++)
 	      							{
 										echo "<div class=\"openElement\">";
-		      							echo "<p class=\"gameName\">". $gameName . "</p>";
+		      							echo "<p class=\"gameName\">". $_SESSION['multiGameName'][$i] . "</p>";
 		      							echo "<p class=\"numPlayers\">(1/4)</p>";
-		      							echo "<a class=\"btn btn-primary btn-lg\" href=\"empty.html\" role=\"button\">Join Game</a>";
+		      							echo "<a class=\"btn btn-primary btn-lg\" href=\"http://localhost:8080/WebPLProject/updateStats.jsp?play=yes&multiIndex=" . $i ."\" role=\"button\">Join Game</a>";
 		      							echo "</div>";
 		      						}
 	      						}
@@ -124,28 +131,50 @@
 	    		<div class="col-md-3" style="height: 100%;">
 		      		<h3>Your Stats</h3>
 		      		<div id="rightbox">
-	      				<a class="btn btn-primary btn-lg" href="empty.html" role="button" style="margin-top: 7%;">View Detailed Stats</a>
+	      				<a class="btn btn-primary btn-lg" href="http://localhost:8080/WebPLProject/updateStats.jsp" role="button" style="margin-top: 7%;">View Detailed Stats</a>
 	      				<div id="stats" style="text-align: left; margin-left: 15%; margin-top: 7%; width: 100%">
-	      					<div class="statsElement">
-		      					<p>Games Played: </p>
-		      					<p id="gamesPlayedStat">201</p>
-		      				</div>
-		      				<div class="statsElement">
-		      					<p>Games Won: </p>
-		      					<p id="gamesWonStat">80</p>
-		      				</div>
-		      				<div class="statsElement">
-		      					<p>Games Lost: </p>
-		      					<p id="gamesLostStat">119</p>
-		      				</div>
-		      				<div class="statsElement">
-		      					<p>Longest Game: </p>
-		      					<p id="longestGameStat">22 hrs</p>
-		      				</div>
-		      				<div class="statsElement">
-		      					<p>Shortest Game: </p>
-		      					<p id="shortestGameStat">1 min</p>
-		      				</div>
+	      					<?php
+	      						if(isset($_POST['stats']))
+                        		{
+                        			$_SESSION['gameStats'] = array($_POST['played'], $_POST['won'], $_POST['lost']);
+                        		}
+	      						if(isset($_SESSION['gameStats']))
+	      						{
+	      							gamesPlayedStat($_SESSION['gameStats'][0]);
+	      							gamesWonStat($_SESSION['gameStats'][1]);
+	      							gamesLostStat($_SESSION['gameStats'][2]);
+	      						}
+	      						else
+	      						{
+	      							gamesPlayedStat(0);
+	      							gamesWonStat(0);
+	      							gamesLostStat(0);
+	      						}
+
+	      						function gamesPlayedStat($played)
+	      						{
+	      							echo "<div class=\"statsElement\">";
+	      							echo "<p>Games Played: </p>";
+	      							echo "<p>" . $played . "</p>";
+	      							echo "</div>";
+	      						}
+
+	      						function gamesWonStat($won)
+	      						{
+	      							echo "<div class=\"statsElement\">";
+	      							echo "<p>Games Won: </p>";
+	      							echo "<p>" . $won . "</p>";
+	      							echo "</div>";
+	      						}
+
+	      						function gamesLostStat($lost)
+	      						{
+	      							echo "<div class=\"statsElement\">";
+	      							echo "<p>Games Lost: </p>";
+	      							echo "<p>" . $lost . "</p>";
+	      							echo "</div>";
+	      						}
+	      					?>
 	      				</div>
 	      			</div>
 	    		</div>      
