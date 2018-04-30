@@ -12,10 +12,15 @@ import javax.servlet.http.HttpSession;
 // libraries for parsing and manipulating XML file
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 
 @WebServlet("/register")
 public class register extends HttpServlet 
@@ -44,14 +49,22 @@ public class register extends HttpServlet
     if (username != null) {
     	try {
             Document doc = create_DOM_from_file("/../WebContent/WebINF/data/login.xml");
-            Element newUser = new Element("user");
-            newUser.addContent(new Element("name").setText(username));
-            newUser.addContent(new Element("pass").setText(request.getParameter("pass")))
-            document.getRootElement().addContent(works);   
-            XMLOutputter xmlOutput = new XMLOutputter();    
-            xmlOutput.output(document, System.out);
-            xmlOutput.setFormat(Format.getPrettyFormat());
-            xmlOutput.output(document,new FileWriter("/../WebContent/WebINF/data/login.xml")));
+            Node users = doc.getFirstChild();
+            Element newUser = doc.createElement("user");
+            Element newUsername = doc.createElement("name");
+            newUsername.appendChild(doc.createTextNode(username));
+            newUser.appendChild(newUsername);
+            Element password = doc.createElement("pass");
+            password.appendChild(doc.createTextNode(request.getParameter("pass")));
+            newUser.appendChild(password);
+            users.appendChild(newUser);
+            
+            TransformerFactory transformFactory = TransformerFactory.newInstance();
+            Transformer transform = transformerFactory.newTransformer();
+            DOMSource docSource = new DOMSource(doc);
+            StreamResult result = new StreamResult(new file("/../WebContent/WebINF/data/login.xml"));
+            transform.transform(docSource, result);
+            
          } catch (Exception e) {
         e.printStackTrace();
          }

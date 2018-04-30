@@ -47,7 +47,6 @@ public class servletLogin extends HttpServlet
       
       boolean userExists = False;
       boolean correctPass = False;
-      String pass = null;
       if (username != null)
       {    
           
