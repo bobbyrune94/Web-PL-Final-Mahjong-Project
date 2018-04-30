@@ -7,13 +7,14 @@
 	    <link rel="stylesheet" type="text/css" href="styles/mainStyles.css" />
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+	    <script type="text/javascript" src="confirmName.js"></script>
 	</head>
 
 	<body ng-app="newGameApp">
 		<div ng-controller="newGameController">
 			<form action="newGame.php" method="post" style="text-align: center; margin-top: 5%">
 				<h1> Create New Game </h1>
-				<p style="margin-top: 1%">Game Name: <input type="text" name="gameName" ng-model="name" ng-blur="checkProfane()"/></p>
+				<p style="margin-top: 1%">Game Name: <input type="text" name="gameName" ng-model="name" ng-blur="checkProfane()" onkeyup="confirm (this.value)"/></p>
 				<input type="checkbox" id="singlePlayer" name="single" style="margin-top: 1%" ng-click="changePlayers()"> Single Player? <br/>
 				<input class="btn btn-primary btn-lg" type="submit" value="Create New Game" name="btn" style="margin-top: 1%"/>
 			</form>
@@ -22,9 +23,9 @@
 
 			<div style="text-align: center;">
 				<h2>Confirmation</h2>
-				Your Game Name is: {{ name }} <br>
 				{{playerNum}} <br>
 				{{data}}
+				<p><span id="confirmation"></span></p>
 			</div>
 
 		</div>
