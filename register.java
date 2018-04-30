@@ -48,7 +48,7 @@ public class register extends HttpServlet
     
     if (username != null) {
     	try {
-            Document doc = create_DOM_from_file("/../WebContent/WebINF/data/login.xml");
+            Document doc = create_DOM_from_file("C:\\Users\\bobby\\OneDrive\\KennyStuff\\CompSci\\UVA\\CS4640 Web PL\\InClass\\WebPLProject\\WebContent\\WEB-INF\\data\\login.xml");
             Node users = doc.getFirstChild();
             Element newUser = doc.createElement("user");
             Element newUsername = doc.createElement("name");
@@ -60,13 +60,14 @@ public class register extends HttpServlet
             users.appendChild(newUser);
             
             TransformerFactory transformFactory = TransformerFactory.newInstance();
-            Transformer transform = transformerFactory.newTransformer();
+            Transformer transform = transformFactory.newTransformer();
             DOMSource docSource = new DOMSource(doc);
-            StreamResult result = new StreamResult(new file("/../WebContent/WebINF/data/login.xml"));
+            StreamResult result = new StreamResult(new File("C:\\Users\\bobby\\OneDrive\\KennyStuff\\CompSci\\UVA\\CS4640 Web PL\\InClass\\WebPLProject\\WebContent\\WEB-INF\\data\\login.xml"));
             transform.transform(docSource, result);
             
+            response.sendRedirect("http://localhost:8080/WebPLProject/servletLogin");
          } catch (Exception e) {
-        e.printStackTrace();
+        	 e.printStackTrace();
          }
     }
     else {
@@ -104,7 +105,6 @@ public class register extends HttpServlet
           "          <br/>" +
           "          <input class='btn btn-primary btn-lg' type='submit' value='Log in'/>" +
           "      </form>" +
-          "      <a class=\"brn btn-primary btn-lg\" href=\"register.java\" role=\"button\"> No Account? Click Here to Register </a>"
           "  </div>" +
           "</div>" +
           "</div>" +
@@ -143,14 +143,13 @@ public class register extends HttpServlet
           "</html>";
           out.println(this_html);
       
-      out.close();
-    }
-  }
-}
+          out.close();
+    	}
+  	}
 
-public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		   throws ServletException, IOException 
-{
+	{
 	   doPost(request, response);
-}
+	}
 }

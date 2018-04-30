@@ -13,7 +13,7 @@
 	  		<div class="container">
 		  		<div class="row">
 		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
-		      			<a class="btn btn-primary btn-lg" href="login.php" role="button" id="logoutButton">Logout</a>
+		      			<a class="btn btn-primary btn-lg" href="http://localhost:8080/WebPLProject/servletLogin" role="button" id="logoutButton">Logout</a>
 		    		</div>
 		    		<div class="col-md-4" style="text-align: center; min-width: 20%;">
 		      			<h1 class="heading">Welcome, 

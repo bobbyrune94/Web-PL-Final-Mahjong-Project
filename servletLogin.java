@@ -45,13 +45,13 @@ public class servletLogin extends HttpServlet
       HttpSession session = request.getSession();
       String username = request.getParameter("user");      
       
-      boolean userExists = False;
-      boolean correctPass = False;
+      boolean userExists = false;
+      boolean correctPass = false;
       if (username != null)
       {    
           
           try {
-             Document doc = create_DOM_from_file("/../WebContent/WebINF/data/login.xml");
+             Document doc = create_DOM_from_file("C:\\Users\\bobby\\OneDrive\\KennyStuff\\CompSci\\UVA\\CS4640 Web PL\\InClass\\WebPLProject\\WebContent\\WEB-INF\\data\\login.xml");
 
              NodeList nList = doc.getElementsByTagName("user");
              // iterate children of nList 
@@ -63,11 +63,15 @@ public class servletLogin extends HttpServlet
                 if (nd.getNodeType() == Node.ELEMENT_NODE) 
                 {
                    Element ele = (Element)nd;
+//                   System.out.println(ele.getElementsByTagName("name").item(0).getTextContent());
                
-                   if (username.compare(ele.getElementsByTagName("name").item(0).getTextContent()) == 0) {
-                	   userExists = True;
-                	   if (request.getParameter("password") != null && request.getParameter("password").compare(ele.getElementsByTagName("pass").item(0).getTextContent()) == 0) {
-                		    correctPass = True;  
+                   if (username.compareTo(ele.getElementsByTagName("name").item(0).getTextContent()) == 0) {
+                	   System.out.println("Found");
+                	   userExists = true;
+//                	   System.out.println(request.getParameter("pass"));
+//                	   System.out.println(ele.getElementsByTagName("pass").item(0).getTextContent());
+                	   if ((request.getParameter("pass") != null) && (request.getParameter("pass").compareTo(ele.getElementsByTagName("pass").item(0).getTextContent()) == 0)) {
+                		    correctPass = true;  
                 		    break;
                 	   }
                    }
@@ -75,7 +79,7 @@ public class servletLogin extends HttpServlet
                 }
              }
           } catch (Exception e) {
-         e.printStackTrace();
+        	  e.printStackTrace();
           } 
       }
       if (userExists && correctPass) {
@@ -117,16 +121,15 @@ public class servletLogin extends HttpServlet
           "        <div class='col-md-5'>" +
           "        </div>" +
           "        <!-- the below column holds the login form -->" +
-          "        <div class='col-md-3'>" +
+          "        <div class='col-md-5'>" +
           "        <form action='http://localhost:8080/WebPLProject/servletLogin' method='post' style='text-align: left' class='container'> " +
           "           <label>Username: </label> <input type='text' name='user' autofocus required />" +
           "           <!-- user-msg is used to inform users of invalid username entries -->" +
           "           <div style='color:red' id='user-msg'>";
-          if (!userExists) {
-        	  thishtml +=
-        			  "User does not exist";
-          }
-      thishtml +=
+//          if (!userExists) {
+//        	  this_html += "User does not exist";
+//          }
+          this_html +=
     	  "</div>" +
           "           <br/>" +
           "           <label>Password: </label> <input type='password' id ='pass' name='pass' required />" +
@@ -135,15 +138,16 @@ public class servletLogin extends HttpServlet
           "          <!-- pass-msg is used to inform users of an incorrect password entry -->" +
           "          <div style='color:red' id='pass-msg'>";
           if (userExists && !correctPass) {
-        	  thishtml +=
+        	  this_html +=
         			  "Incorrect Password";
           }
-      thishtml +=
+          this_html +=
           "</div>" +
           "          <br/>" +
-          "          <input class='btn btn-primary btn-lg' type='submit' value='Log in'/>" +
+          "          <input class='btn btn-primary btn-lg' type='submit' value='Log in'/> <br>" +
+          "      <a class=\"brn btn-primary btn-lg\" href=\"register\" role=\"button\" style=\"margin-top: 50%\"> No Account? Click Here to Register </a>" +
           "      </form>" +
-          "      <a class=\"brn btn-primary btn-lg\" href=\"register.java\" role=\"button\"> No Account? Click Here to Register </a>"
+          
           "  </div>" +
           "</div>" +
           "</div>" +
@@ -192,8 +196,7 @@ public class servletLogin extends HttpServlet
       out.close();
       }
    }
-   public void doGet(HttpServletRequest request, HttpServletResponse response)
-		   throws ServletException, IOException 
+   public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
    {
 	   doPost(request, response);
    }
